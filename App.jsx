@@ -1,8 +1,23 @@
 import { useState } from "react"
 import { clsx } from "clsx"
-import { languages } from "./languages"
-import { getFarewellText, getRandomWord } from "./utils"
+import { languages } from "./data/languages"
+import { getFarewellText, getRandomWord } from "./data/utils"
 import Confetti from "react-confetti"
+
+
+
+
+// Components
+import Header from "./components/Header"
+import GameStatus from "./components/GameStatus"
+import LanguageChips from "./components/LanguageChips"
+import Word from "./components/Word"
+import Board from "./components/Board"
+import NewButton from "./components/NewButton"
+
+
+// Screen Reader Components
+import ForScreenReader from "./screenReaderComponents/ForScreenReader"
 
 
 
@@ -135,56 +150,38 @@ export default function AssemblyEndgame() {
                         numberOfPieces={7000}
                     />
             }
-            <header>
-                <h1>Assembly: Endgame</h1>
-                <p>Guess the word within 8 attempts to keep the
-                programming world safe from Assembly!</p>
-            </header>
+            <Header />
 
-            <section
-                aria-live="polite"
-                role="status"
-                className={gameStatusClass}
-            >
-                {renderGameStatus()}
-            </section>
+            <GameStatus 
+                renderGameStatus={renderGameStatus}
+                gameStatusClass={gameStatusClass}
+            />
 
-            <section className="language-chips">
-                {languageElements}
-            </section>
+            <LanguageChips 
+                languageElements={languageElements}
+            />
 
-            <section className="word">
-                {letterElements}
-            </section>
+            <Word 
+                letterElements={letterElements}
+            />
 
             {/* Combined visually-hidden aria-live region for status updates */}
-            <section
-                className="sr-only"
-                aria-live="polite"
-                role="status"
-            >
-                <p>
-                    {currentWord.includes(lastGuessedLetter) ?
-                        `Correct! The letter ${lastGuessedLetter} is in the word.` :
-                        `Sorry, the letter ${lastGuessedLetter} is not in the word.`
-                    }
-                    You have {numGuessesLeft} attempts left.
-                </p>
-                <p>Current word: {currentWord.split("").map(letter =>
-                    guessedLetters.includes(letter) ? letter + "." : "blank.")
-                    .join(" ")}</p>
+           <ForScreenReader 
+                lastGuessedLetter={lastGuessedLetter}
+                numGuessesLeft={numGuessesLeft - wrongGuessCount}
+                currentWord={currentWord}
+                guessedLetters={guessedLetters}
+           />
 
-            </section>
+            <Board 
+                keyboardElements={keyboardElements}
+            />
 
-            <section className="keyboard">
-                {keyboardElements}
-            </section>
+            <NewButton 
+                isGameOver={isGameOver}
+                startNewGame={startNewGame}
+            />
 
-            {isGameOver &&
-                <button
-                    className="new-game"
-                    onClick={startNewGame}
-                >New Game</button>}
         </main>
     )
 }
