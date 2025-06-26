@@ -14,7 +14,7 @@ Test your vocabulary and logic by guessing the hidden word in **8 attempts**.
 ---
 ## 🌐 Live Demo
 
-Try out the game instantly: [hagmangame.netlify.app](https://hagmangame.netlify.app)
+Try out the game instantly: [hagmangame.netlify.app](https://hagmangamenitin.netlify.app/)
 
 ## 🛠️ My Approach
 
