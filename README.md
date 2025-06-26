@@ -12,6 +12,9 @@ Test your vocabulary and logic by guessing the hidden word in **8 attempts**.
 - **Learning Focus:** This project is a playground for experimenting with React concepts, component design, and modern utilities.
 
 ---
+## 🌐 Live Demo
+
+Try out the game instantly: [hagmangame.netlify.app](https://hagmangame.netlify.app)
 
 ## 🛠️ My Approach
 
